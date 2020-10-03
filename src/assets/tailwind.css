@@ -8,6 +8,7 @@
   @apply font-bold;
   @apply border border-solid;
   @apply rounded;
+  @apply text-gray-700;
 }
 
 .btn-small {

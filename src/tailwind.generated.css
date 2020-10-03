@@ -18948,6 +18948,9 @@ video {
   border-width: 1px;
   border-style: solid;
   border-radius: 0.25rem;
+  --text-opacity: 1;
+  color: #4a5568;
+  color: rgba(74, 85, 104, var(--text-opacity));
 }
 
 .btn-small {

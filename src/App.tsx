@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { Footer } from "./components/Footer";
+import { Main } from "./components/Main";
 import Modal from "./components/Modal";
 import { NavBar } from "./components/Nav";
 
@@ -18,6 +19,7 @@ function App() {
     <>
       <div className="flex flex-col h-screen w-screen justify-between">
         <NavBar openModal={openModal} />
+        <Main openModal={openModal} />
         <Footer />
       </div>
       <Modal {...{ isModalOpen, onRequestClose }}>
