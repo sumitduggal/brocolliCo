@@ -3,3 +3,13 @@
 @tailwind utilities;
 
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&family=Sansita+Swashed:wght@900&display=swap");
+
+.btn {
+  @apply font-bold;
+  @apply border border-solid;
+  @apply rounded;
+}
+
+.btn-small {
+  @apply p-3;
+}

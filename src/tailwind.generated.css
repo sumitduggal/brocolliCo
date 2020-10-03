@@ -18943,6 +18943,17 @@ video {
 
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&family=Sansita+Swashed:wght@900&display=swap");
 
+.btn {
+  font-weight: 700;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0.25rem;
+}
+
+.btn-small {
+  padding: 0.75rem;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
