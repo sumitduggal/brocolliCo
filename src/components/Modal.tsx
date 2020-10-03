@@ -14,14 +14,13 @@ const DEFAULT_STYLING: ReactModal.Styles = {
     border: "none",
     padding: 0,
     borderRadius: "12px",
-    top: "10vh",
     boxShadow: `0 40px 120px rgba(0,0,0,0.5)`,
   },
   overlay: {
     backgroundColor: "rgba(0,0,0,0.5)",
     display: "flex",
     justifyContent: "center",
-    alignItems: "flex-start",
+    alignItems: "center",
   },
 };
 
