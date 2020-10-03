@@ -1,11 +1,12 @@
 import React, { useCallback, useState } from "react";
+
 import { Footer } from "./components/Footer";
 import { Main } from "./components/Main";
-import Modal from "./components/Modal";
 import { NavBar } from "./components/Nav";
+import { RequestInviteModal } from "./components/RequestInvite";
 
 function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   const openModal = useCallback(() => {
     setIsModalOpen(true);
@@ -22,9 +23,7 @@ function App() {
         <Main openModal={openModal} />
         <Footer />
       </div>
-      <Modal {...{ isModalOpen, onRequestClose }}>
-        <div className="bg-white w-full flex-auto">Modal Children</div>
-      </Modal>
+      <RequestInviteModal {...{ isModalOpen, onRequestClose }} />
     </>
   );
 }
