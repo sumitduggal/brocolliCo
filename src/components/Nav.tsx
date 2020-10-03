@@ -11,7 +11,7 @@ export const NavBar: React.FC<NavBarProps> = ({ openModal }) => {
   };
   return (
     <div className="border-b border-solid border-gray-300">
-      <nav className="container mx-auto px-10 sm:px-0 h-20 flex items-center justify-between">
+      <nav className="container mx-auto px-5 sm:px-0 h-20 flex items-center justify-between">
         <a href="/">
           <h1 className="text-3xl uppercase font-sansita text-green-900">
             Brocolli & co

@@ -6,7 +6,7 @@ import { NavBar } from "./components/Nav";
 import { RequestInviteModal } from "./components/RequestInvite";
 
 function App() {
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = useCallback(() => {
     setIsModalOpen(true);
@@ -23,7 +23,9 @@ function App() {
         <Main openModal={openModal} />
         <Footer />
       </div>
-      <RequestInviteModal {...{ isModalOpen, onRequestClose }} />
+      {isModalOpen && (
+        <RequestInviteModal {...{ isModalOpen, onRequestClose }} />
+      )}
     </>
   );
 }

@@ -1,45 +1,60 @@
-import React, { FormEvent, useEffect, useState } from "react";
-
-const checkFullNameValidation = (value: string): boolean => value.length >= 3;
-const checkEmailValidation = (value: string): boolean => {
-  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  return re.test(value);
-};
-const checkConfirmEmailValidation = (confirmEmail: string, email: string) =>
-  confirmEmail === email;
+import React, { useState } from "react";
+import {
+  FormResponseType,
+  RequestInviteFormData,
+  requestInviteFormSubmit,
+} from "../../api";
+import {
+  checkConfirmEmailValidation,
+  checkEmailValidation,
+  checkFullNameValidation,
+} from "./formHelpers";
 
 type FormErrors = {
   fullName: boolean;
   email: boolean;
   confirmEmail: boolean;
+  formSubmission: FormResponseType;
 };
 
-export const IncompleteForm = () => {
+type IncompleteFormProps = {
+  formSubmittedSuccessful: () => void;
+};
+
+export const IncompleteForm = ({
+  formSubmittedSuccessful,
+}: IncompleteFormProps) => {
   const [fullNameInput, setFullNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [confirmEmailInput, setConfirmEmailInput] = useState("");
+  const [isSubmitting, setFormSubmitting] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({
     fullName: false,
     email: false,
     confirmEmail: false,
+    formSubmission: {
+      ok: true,
+    },
   });
 
   const handleFullNameChange = (e: React.FormEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value.trim();
-    if (value) setFullNameInput(value);
+    setFullNameInput(value);
   };
 
   const handleEmailChange = (e: React.FormEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value.trim();
-    if (value) setEmailInput(value);
+    setEmailInput(value);
   };
 
   const handleConfirmEmailChange = (e: React.FormEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value.trim();
-    if (value) setConfirmEmailInput(value);
+    setConfirmEmailInput(value);
   };
 
-  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleOnSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
 
     const isFullNameValid = checkFullNameValidation(fullNameInput);
@@ -48,22 +63,51 @@ export const IncompleteForm = () => {
       confirmEmailInput,
       emailInput
     );
-    setErrors((prevState) => {
+    setErrors(() => {
       return {
-        ...prevState,
         fullName: !isFullNameValid,
         email: !isEmailValid,
         confirmEmail: !isConfirmEmailValid,
+        formSubmission: {
+          ok: true,
+        },
       };
     });
 
     const isFormValid = isFullNameValid;
     if (isFormValid) {
-      console.log("onSubmit");
-    } else {
-      console.log("errors");
+      setFormSubmitting(true);
+      const formData: RequestInviteFormData = {
+        name: fullNameInput,
+        email: emailInput,
+      };
+      const { ok, error } = await requestInviteFormSubmit(formData);
+      // Note: for better UX and to avoid
+      // noticing flicker when response is too quick
+      setTimeout(() => {
+        if (ok) {
+          formSubmittedSuccessful();
+        } else {
+          setErrors((prevState) => {
+            return {
+              ...prevState,
+              formSubmission: {
+                ok,
+                error,
+              },
+            };
+          });
+        }
+      }, 2000);
     }
+    setTimeout(() => {
+      setFormSubmitting(false);
+    }, 2000);
   };
+
+  const submittingProps = isSubmitting
+    ? "opacity-50 select-none cursor-not-allowed"
+    : null;
 
   return (
     <div className="flex flex-col justify-center items-center">
@@ -77,6 +121,7 @@ export const IncompleteForm = () => {
             <input
               required
               type="text"
+              name="name"
               placeholder="Full name"
               className="m-auto input"
               value={fullNameInput}
@@ -92,6 +137,7 @@ export const IncompleteForm = () => {
             <input
               required
               type="email"
+              name="email"
               placeholder="Email"
               className="m-auto input"
               value={emailInput}
@@ -117,9 +163,17 @@ export const IncompleteForm = () => {
             )}
           </label>
         </fieldset>
-        <button type="submit" className={`btn btn-small w-full`}>
-          Send
+        <button
+          type="submit"
+          className={`btn btn-small w-full ${submittingProps}`}
+        >
+          {isSubmitting ? "Sending, please wait..." : "Send"}
         </button>
+        {!errors.formSubmission.ok && (
+          <div className="form-error text-center mt-5">
+            {errors.formSubmission.error?.errorMessage}
+          </div>
+        )}
       </form>
     </div>
   );

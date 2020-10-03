@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import Modal, { ModalProps } from "../Modal";
 import { IncompleteForm } from "./IncompleteForm";
+import { SuccessfulFormSubmission } from "./SuccessfulFormSubmission";
 
 enum RequestInviteStage {
   INCOMPLETE = "INCOMPLETE",
@@ -20,11 +21,19 @@ export const RequestInviteModal: React.FC<ModalProps> = ({
     let component;
     switch (currentModalStage) {
       case RequestInviteStage.INCOMPLETE:
-        component = <IncompleteForm />;
+        component = (
+          <IncompleteForm
+            formSubmittedSuccessful={() =>
+              setModalStage(RequestInviteStage.SUCCESS)
+            }
+          />
+        );
         break;
       case RequestInviteStage.SUCCESS:
       default:
-        component = <div>Success</div>;
+        component = (
+          <SuccessfulFormSubmission onRequestClose={onRequestClose} />
+        );
         break;
     }
     return component;
