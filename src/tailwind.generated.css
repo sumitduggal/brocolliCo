@@ -10218,6 +10218,14 @@ video {
   font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
+.font-raleway {
+  font-family: Raleway, sans-serif;
+}
+
+.font-sansita {
+  font-family: Sansita Swashed, cursive;
+}
+
 .font-hairline {
   font-weight: 100;
 }
@@ -18932,6 +18940,8 @@ video {
 .animate-bounce {
   animation: bounce 1s infinite;
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&family=Sansita+Swashed:wght@900&display=swap");
 
 @media (min-width: 640px) {
   .sm\:container {
@@ -28573,6 +28583,14 @@ video {
 
   .sm\:font-mono {
     font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  .sm\:font-raleway {
+    font-family: Raleway, sans-serif;
+  }
+
+  .sm\:font-sansita {
+    font-family: Sansita Swashed, cursive;
   }
 
   .sm\:font-hairline {
@@ -46902,6 +46920,14 @@ video {
     font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
+  .md\:font-raleway {
+    font-family: Raleway, sans-serif;
+  }
+
+  .md\:font-sansita {
+    font-family: Sansita Swashed, cursive;
+  }
+
   .md\:font-hairline {
     font-weight: 100;
   }
@@ -65229,6 +65255,14 @@ video {
     font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
+  .lg\:font-raleway {
+    font-family: Raleway, sans-serif;
+  }
+
+  .lg\:font-sansita {
+    font-family: Sansita Swashed, cursive;
+  }
+
   .lg\:font-hairline {
     font-weight: 100;
   }
@@ -83554,6 +83588,14 @@ video {
 
   .xl\:font-mono {
     font-family: Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  }
+
+  .xl\:font-raleway {
+    font-family: Raleway, sans-serif;
+  }
+
+  .xl\:font-sansita {
+    font-family: Sansita Swashed, cursive;
   }
 
   .xl\:font-hairline {

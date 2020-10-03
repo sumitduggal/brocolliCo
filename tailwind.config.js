@@ -5,7 +5,12 @@ module.exports = {
   },
   purge: [],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        raleway: ["Raleway", "sans-serif"],
+        sansita: ["Sansita Swashed", "cursive"],
+      },
+    },
   },
   variants: {},
   plugins: [],
