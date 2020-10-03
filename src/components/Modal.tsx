@@ -4,16 +4,18 @@ import merge from "deepmerge";
 
 const DEFAULT_STYLING: ReactModal.Styles = {
   content: {
-    width: "min(100%, 460px)",
+    width: "min(100%, 360px)",
     position: "relative",
     minHeight: "12rem",
     maxHeight: "80vh",
     display: "flex",
-
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
     background: "none",
     border: "none",
     padding: 0,
-    borderRadius: "12px",
     boxShadow: `0 40px 120px rgba(0,0,0,0.5)`,
   },
   overlay: {
@@ -24,7 +26,7 @@ const DEFAULT_STYLING: ReactModal.Styles = {
   },
 };
 
-type ModalProps = {
+export type ModalProps = {
   isModalOpen: boolean;
   onRequestClose: () => void;
   modalStyles?: any;
