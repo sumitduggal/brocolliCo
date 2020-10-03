@@ -14,3 +14,9 @@
 .btn-small {
   @apply p-3;
 }
+
+.input {
+  @apply border border-gray-500;
+  @apply w-full;
+  @apply py-2 px-3;
+}
