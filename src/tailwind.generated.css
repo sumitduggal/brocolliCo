@@ -18944,13 +18944,30 @@ video {
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&family=Sansita+Swashed:wght@900&display=swap");
 
 .btn {
+  transition: all 0.2s ease;
   font-weight: 700;
   border-width: 1px;
   border-style: solid;
+  --border-opacity: 1;
+  border-color: #22543d;
+  border-color: rgba(34, 84, 61, var(--border-opacity));
   border-radius: 0.25rem;
+  --text-opacity: 1;
+  color: #22543d;
+  color: rgba(34, 84, 61, var(--text-opacity));
+  outline: none;
+  box-shadow: 2px 2px 0px 1px currentColor;
+}
+
+.btn:hover {
+  transition: all 0.2s ease;
+  box-shadow: -4px -2px 0 1px currentColor;
   --text-opacity: 1;
   color: #4a5568;
   color: rgba(74, 85, 104, var(--text-opacity));
+  --border-opacity: 1;
+  border-color: #4a5568;
+  border-color: rgba(74, 85, 104, var(--border-opacity));
 }
 
 .btn-small {

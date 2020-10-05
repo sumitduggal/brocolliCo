@@ -5,10 +5,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@500;700&family=Sansita+Swashed:wght@900&display=swap");
 
 .btn {
+  transition: all 0.2s ease;
   @apply font-bold;
-  @apply border border-solid;
+  @apply border border-solid border-green-900;
   @apply rounded;
+  @apply text-green-900;
+  outline: none;
+  box-shadow: 2px 2px 0px 1px currentColor;
+}
+.btn:hover {
+  transition: all 0.2s ease;
+  box-shadow: -4px -2px 0 1px currentColor;
   @apply text-gray-700;
+  @apply border-gray-700;
 }
 
 .btn-small {

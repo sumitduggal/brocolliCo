@@ -19,12 +19,7 @@ export const requestInviteFormSubmit = async ({
   name,
   email,
 }: RequestInviteFormData): Promise<FormResponseType> => {
-  let result: FormResponseType = {
-    ok: false,
-    error: {
-      errorMessage: "",
-    },
-  };
+  let result: FormResponseType;
   try {
     const response = await fetch(REQUEST_FORM_ENDPOINT, {
       method: "POST",
@@ -37,6 +32,7 @@ export const requestInviteFormSubmit = async ({
       },
     });
 
+    console.log('response', response)
     const { ok } = response;
     if (ok) {
       result = {
