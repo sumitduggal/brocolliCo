@@ -50,6 +50,8 @@ const Modal: React.FC<ModalProps> = ({
   );
 };
 
-ReactModal.setAppElement("#root");
+if (process.env.NODE_ENV !== "test") {
+  ReactModal.setAppElement("#root");
+}
 
 export default Modal;
