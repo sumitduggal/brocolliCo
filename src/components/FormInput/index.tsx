@@ -30,10 +30,15 @@ export const FormInput = ({
     <label>
       <input
         {...{ required, type, name, placeholder, value }}
+        aria-label={`${name}-input`}
         className="m-auto input"
         onChange={handleFullNameChange}
       />
-      {hasError && <span className="form-error">{errorMessage}</span>}
+      {hasError && (
+        <span aria-label={`${name}-input-error`} className="form-error">
+          {errorMessage}
+        </span>
+      )}
     </label>
   );
 };
