@@ -4,7 +4,13 @@ const currentYear = new Date().getFullYear();
 
 export const Footer = () => {
   return (
-    <div className="border-t border-solid border-gray-300">
+    <div
+      className="border-t border-solid border-gray-300 bg-bottom"
+      style={{
+        backgroundImage:
+          "url(https://static.vecteezy.com/system/resources/previews/000/092/184/original/various-broccoli-vectors.jpg)",
+      }}
+    >
       <footer className="container mx-auto px-10 sm:px-0 h-20 flex flex-col items-center justify-center">
         <h1 className="text-xl">
           Made with

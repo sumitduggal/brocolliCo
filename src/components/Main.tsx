@@ -4,14 +4,19 @@ type MainProps = {
   openModal: () => void;
 };
 
-export const Main: React.FC<MainProps> = ({ openModal }) => <main className="flex flex-col flex-1 justify-center items-center">
+export const Main: React.FC<MainProps> = ({ openModal }) => (
+  <main
+    className="flex flex-col flex-1 justify-center items-center"
+    style={{ minHeight: "26rem" }}
+  >
     <h2 className="font-bold text-5xl leading-tight max-w-md text-center text-gray-700">
-        A better way <br /> to enjoy every day.
+      A better way <br /> to enjoy every day.
     </h2>
     <p className="text-gray-600 my-4 text-md">
-        Be the first to know when we launch.
+      Be the first to know when we launch.
     </p>
     <button onClick={openModal} className="btn btn-small">
-        Request an Invite
+      Request an Invite
     </button>
-</main>
+  </main>
+);
