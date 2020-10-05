@@ -7,4 +7,7 @@ export const checkEmailValidation = (value: string): boolean => {
 export const checkConfirmEmailValidation = (
   confirmEmail: string,
   email: string
-) => confirmEmail === email;
+) => {
+  const isConfirmEmailValid = checkEmailValidation(confirmEmail);
+  return isConfirmEmailValid && confirmEmail === email;
+};
