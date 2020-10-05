@@ -4,6 +4,7 @@ import {
   RequestInviteFormData,
   requestInviteFormSubmit,
 } from "../../api";
+import { FormInput } from "../FormInput";
 import {
   checkConfirmEmailValidation,
   checkEmailValidation,
@@ -37,21 +38,6 @@ export const IncompleteForm = ({
     },
   });
 
-  const handleFullNameChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const value = e.currentTarget.value.trim();
-    setFullNameInput(value);
-  };
-
-  const handleEmailChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const value = e.currentTarget.value.trim();
-    setEmailInput(value);
-  };
-
-  const handleConfirmEmailChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const value = e.currentTarget.value.trim();
-    setConfirmEmailInput(value);
-  };
-
   const handleOnSubmit = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
@@ -82,6 +68,7 @@ export const IncompleteForm = ({
         email: emailInput,
       };
       const { ok, error } = await requestInviteFormSubmit(formData);
+
       // Note: for better UX and to avoid
       // noticing flicker when response is too quick
       setTimeout(() => {
@@ -98,13 +85,13 @@ export const IncompleteForm = ({
             };
           });
         }
-      }, 2000);
+        setFormSubmitting(false);
+      }, 1000);
     }
-    setTimeout(() => {
-      setFormSubmitting(false);
-    }, 2000);
   };
 
+  // Altering submit button css classNames
+  // based on the submit state
   const submittingProps = isSubmitting
     ? "opacity-50 select-none cursor-not-allowed"
     : null;
@@ -117,51 +104,36 @@ export const IncompleteForm = ({
       <span className="w-10 bg-gray-600 h-1 my-3" />
       <form className="w-full" onSubmit={handleOnSubmit}>
         <fieldset className="my-10 flex flex-col justify-center items-center space-y-2">
-          <label>
-            <input
-              required
-              type="text"
-              name="name"
-              placeholder="Full name"
-              className="m-auto input"
-              value={fullNameInput}
-              onChange={handleFullNameChange}
-            />
-            {errors.fullName && (
-              <span className="form-error">
-                Full name must be atleast 3 characters long
-              </span>
-            )}
-          </label>
-          <label>
-            <input
-              required
-              type="email"
-              name="email"
-              placeholder="Email"
-              className="m-auto input"
-              value={emailInput}
-              onChange={handleEmailChange}
-            />
-            {errors.email && (
-              <span className="form-error">Enter a valid email address</span>
-            )}
-          </label>
-          <label>
-            <input
-              required
-              type="email"
-              placeholder="Confirm email"
-              className="m-auto input"
-              value={confirmEmailInput}
-              onChange={handleConfirmEmailChange}
-            />
-            {errors.confirmEmail && (
-              <span className="form-error">
-                Confirm email address should match Email address
-              </span>
-            )}
-          </label>
+          <FormInput
+            required
+            type="text"
+            name="name"
+            placeholder="Full name"
+            value={fullNameInput}
+            onChange={setFullNameInput}
+            hasError={errors.fullName}
+            errorMessage="Full name must be atleast 3 characters long"
+          />
+          <FormInput
+            required
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={emailInput}
+            onChange={setEmailInput}
+            hasError={errors.email}
+            errorMessage="Enter a valid email address"
+          />
+          <FormInput
+            required
+            type="email"
+            name="email"
+            placeholder="Confirm Email"
+            value={confirmEmailInput}
+            onChange={setConfirmEmailInput}
+            hasError={errors.confirmEmail}
+            errorMessage="Confirm email address should match Email address"
+          />
         </fieldset>
         <button
           type="submit"
