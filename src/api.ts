@@ -37,22 +37,15 @@ export const requestInviteFormSubmit = async ({
       },
     });
 
-    const { ok, status } = response;
+    const { ok } = response;
     if (ok) {
       result = {
         ok: true,
       };
     } else {
-      if (status >= 400 && status < 500) {
-        const { errorMessage } = await response.json();
-
-        result = {
-          ok: false,
-          error: {
-            errorMessage,
-          },
-        };
-      }
+      const { errorMessage } = await response.json();
+      const error = new Error(errorMessage);
+      throw error;
     }
   } catch (error) {
     result = {
