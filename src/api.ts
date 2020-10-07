@@ -32,7 +32,6 @@ export const requestInviteFormSubmit = async ({
       },
     });
 
-    console.log('response', response)
     const { ok } = response;
     if (ok) {
       result = {

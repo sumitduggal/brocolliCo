@@ -21,8 +21,8 @@ export const FormInput = ({
   hasError,
   errorMessage,
 }: FormInputProps) => {
-  const handleFullNameChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const value = e.currentTarget.value.trim();
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.currentTarget.value;
     onChange(value);
   };
 
@@ -32,7 +32,7 @@ export const FormInput = ({
         {...{ required, type, name, placeholder, value }}
         aria-label={`${name}-input`}
         className="m-auto input"
-        onChange={handleFullNameChange}
+        onChange={handleChange}
       />
       {hasError && (
         <span aria-label={`${name}-input-error`} className="form-error">

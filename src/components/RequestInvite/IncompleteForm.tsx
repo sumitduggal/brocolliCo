@@ -28,6 +28,7 @@ export const IncompleteForm = ({
   const [fullNameInput, setFullNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [confirmEmailInput, setConfirmEmailInput] = useState("");
+
   const [isSubmitting, setFormSubmitting] = useState(false);
   const [errors, setErrors] = useState<FormErrors>({
     fullName: false,
@@ -43,11 +44,15 @@ export const IncompleteForm = ({
   ): Promise<void> => {
     e.preventDefault();
 
-    const isFullNameValid = checkFullNameValidation(fullNameInput);
-    const isEmailValid = checkEmailValidation(emailInput);
+    const fullNameTrimmed = fullNameInput.trim();
+    const emailTrimmed = emailInput.trim();
+    const confirmEmailTrimmed = confirmEmailInput.trim();
+
+    const isFullNameValid = checkFullNameValidation(fullNameTrimmed);
+    const isEmailValid = checkEmailValidation(emailTrimmed);
     const isConfirmEmailValid = checkConfirmEmailValidation(
-      confirmEmailInput,
-      emailInput
+      confirmEmailTrimmed,
+      emailTrimmed
     );
     setErrors(() => {
       return {
@@ -60,12 +65,12 @@ export const IncompleteForm = ({
       };
     });
 
-    const isFormValid = isFullNameValid;
+    const isFormValid = isFullNameValid && isEmailValid && isConfirmEmailValid;
     if (isFormValid) {
       setFormSubmitting(true);
       const formData: RequestInviteFormData = {
-        name: fullNameInput,
-        email: emailInput,
+        name: fullNameTrimmed,
+        email: emailTrimmed,
       };
       const { ok, error } = await requestInviteFormSubmit(formData);
 
@@ -75,6 +80,7 @@ export const IncompleteForm = ({
         if (ok) {
           formSubmittedSuccessful();
         } else {
+          setFormSubmitting(false);
           setErrors((prevState) => {
             return {
               ...prevState,
@@ -85,7 +91,6 @@ export const IncompleteForm = ({
             };
           });
         }
-        setFormSubmitting(false);
       }, 1000);
     }
   };
